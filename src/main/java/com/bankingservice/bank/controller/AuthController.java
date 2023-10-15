@@ -6,14 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.bankingservice.bank.entity.User;
 import com.bankingservice.bank.repository.UserRepository;
 
 @Controller
 public class AuthController {
 
-     @Autowired
+    @Autowired
     UserRepository userRepository;
 
     @GetMapping("/login")
@@ -32,14 +32,16 @@ public class AuthController {
             @RequestParam String password,
             Model model) {
 
+        User user = userRepository.findByUsername(username);
 
-        // Check if user exists in the database and the password/username are both correct
-        if (userRepository.existsByUsername(username) && userRepository.existsByPassword(password)) {
-            return "redirect:/dashboard"; // Redirect to a user dashboard page
+        // Check if the user exists and the password matches
+        if (user != null && password.trim().equals(user.getPassword().trim())) {
+            // Passwords match; the user is authenticated.
+            return "dashboard"; // Redirect to the dashboard.
         } else {
             model.addAttribute("error", "Incorrect username or password");
-            return "login";
         }
-    }
 
+        return "login";
+    }
 }
