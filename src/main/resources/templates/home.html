@@ -5,13 +5,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: right;
+            padding: 45px;
         }
         .container {
             text-align: center;
@@ -19,29 +21,85 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .welcome-container {
+            text-align: left;
+            padding: 20px;
+            margin: 20px 0;
         }
         h1 {
             color: #007bff;
+            font-size: 36px;
         }
         p {
             font-size: 18px;
-            margin-top: 20px;
+            margin: 20px 0;
         }
-        a {
+        .login-link {
             text-decoration: none;
             background-color: #007bff;
             color: #fff;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 5px;
             font-weight: bold;
+            font-size: 18px;
+            float: right;
+        }
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .section h2 {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* Add CSS class to style the description text */
+        .description {
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <a class="login-link" href="/login">Login</a>
+    </div>
     <div class="container">
-        <h1 th:text="${pageTitle}">Welcome to Online Banking</h1>
-        <p>Experience secure and convenient online banking services.</p>
-        <a href="/login">Login</a>
+        <div class="welcome-container">
+            <h1 th:text="${pageTitle}">Welcome to Online Banking</h1>
+            <p>Experience secure and convenient online banking services.</p>
+        </div>
+    </div>
+    
+    <!-- Information Sections -->
+    <div class="section" id="about-our-bank">
+        <h2><a href="/aboutourbank">About Our Bank</a></h2>
+        <!-- Remove the anchor tag around the description -->
+        <p class="description">Welcome to our trusted banking institution, where your financial well-being is our top priority. With a rich history of serving our community, we are committed to providing reliable and innovative banking solutions. Learn more about our mission and values as we continue to grow together with you.</p>
+    </div>
+    
+    <div class="section" id="online-banking-services">
+        <h2><a href="/onlinebankingservices">Online Banking Services</a></h2>
+        <!-- Remove the anchor tag around the description -->
+        <p class="description">Learn how to bank online with ease. Manage your accounts, pay bills, and more from the comfort of your home.</p>
+    </div>
+    
+    <div class="section" id="customer-support">
+        <h2><a href="/customersupport">Customer Support</a></h2>
+        <!-- Remove the anchor tag around the description -->
+        <p class="description">If you need assistance, please call our support team at <strong>1-800-123-4567</strong>.</p>
+    </div>
+    
+    <div class="section" id="help-faq">
+        <h2><a href="/helpfaq">Help and FAQ</a></h2>
+        <!-- Remove the anchor tag around the description -->
+        <p class="description">Find answers to common questions in our.</p>
     </div>
 </body>
 </html>
