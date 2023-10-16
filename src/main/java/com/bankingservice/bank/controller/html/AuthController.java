@@ -40,8 +40,7 @@ public class AuthController {
             return "dashboard"; // Redirect to the dashboard.
         } else {
             model.addAttribute("error", "Incorrect username or password");
+            return "login";
         }
-
-        return "login";
     }
 }

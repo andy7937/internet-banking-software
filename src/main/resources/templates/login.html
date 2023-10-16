@@ -4,99 +4,122 @@
     <title>Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(to right, red 0%, white 50%); /* Gradient background */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column; /* Center items vertically */
         }
-        .container {
-            text-align: center;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
         }
+
+        .logo-container img {
+            max-width: 100%;
+        }
+
         h1 {
-            color: #007bff;
+            color: black; /* Use a bold blue color */
+            margin-bottom: 20px;
+            font-family: "Tiempos Text", "Times New Roman", serif;
+            font-size: 36.5px;
+            font-style: normal;
+            font-weight: 700;
         }
+
         form {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Start alignment */
+            padding: 20px;
+            width: 300px; /* Set a fixed width for the form */
         }
+
         label {
             font-weight: bold;
+            color: #555; /* Dark gray label text */
+            width: 100%; /* Ensure labels take full width */
+            text-align: left; /* Left-align the label text */
         }
+
         input {
             margin: 10px 0;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
+            transition: border-color 0.3s;
         }
+
+        input:focus {
+            border-color: #007bff; /* Highlight the input on focus */
+        }
+
         button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
+            box-sizing: border-box;
             cursor: pointer;
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            transition: all 0.3s ease-out 0s;
+            font-family: "National 2", "Source Sans Pro", system-ui, sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: 0px;
+            color: rgb(255, 255, 255);
+            background-color: blue;
+            border: 0px;
+            border-radius: 62.5rem;
+            box-shadow: none;
+            min-width: 120px;
+            padding: 0.75rem 1.5rem;
         }
+
+        button:hover {
+            background-color: #0056b3; /* Darken the button on hover */
+
+        }
+
         .signup-link {
             margin-top: 20px;
             font-size: 14px;
             color: #007bff;
             text-decoration: none;
         }
+
         .error-message {
             color: red;
             font-weight: bold;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Login to Online Banking</h1>
-        <form method="post" onsubmit="submitForm()">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Log In</button>
-        </form>
-        <a class="signup-link" href="/signup">Don't have an account? Sign up here.</a>
-        <div id="error-message" class="error-message"></div>
+    <div class="logo-container">
+        <img th:src="@{/images/finlogo.jpg}" style="width: 25%" alt="About Our Bank">
     </div>
 
-    <script th:inline="javascript">
-        function submitForm() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            var errorMessage = document.getElementById('error-message');
-            
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/authenticate', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        window.location.href = '/dashboard';
-                    } else {
-                        errorMessage.innerText = 'Incorrect username or password';
-                    }
-                }
-            };
+    <h1>Log in</h1>
+    <form method="post">
+        <label for="username"> Customer ID or username:</label>
+        <input type="text" id="username" name="username" required>
 
-            var data = 'username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password);
-            xhr.send(data);
-        }
-    </script>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Log In</button>
+    </form>
+    <a class="signup-link" href="/signup">Don't have an account? Sign up here.</a>
+    <div id="error-message" class="error-message" th:text="${error}"></div>
 </body>
+</html>
 </html>
