@@ -1,105 +1,208 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Online Banking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        .header {
-            background-color: #007bff;
-            color: #fff;
-            text-align: right;
-            padding: 45px;
-        }
-        .container {
-            text-align: center;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .welcome-container {
-            text-align: left;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        h1 {
-            color: #007bff;
-            font-size: 36px;
-        }
-        p {
-            font-size: 18px;
-            margin: 20px 0;
-        }
-        .login-link {
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 18px;
-            float: right;
-        }
-        .section {
-            background-color: #fff;
-            border-radius: 10px;
-            margin: 20px 0;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-        }
-        .section h2 {
-            font-size: 24px;
-            cursor: pointer;
-        }
-        /* Add CSS class to style the description text */
-        .description {
-            font-size: 16px;
-        }
+        body, h1, h2, h3, h4, h5 { font-family: "Poppins", sans-serif; }
+        body { font-size: 16px; }
+        .w3-half img { margin-bottom: -6px; margin-top: 16px; opacity: 0.8; cursor: pointer; }
+        .w3-half img:hover { opacity: 1; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <a class="login-link" href="/login">Login</a>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+    <br>
+    <div class="w3-container">
+        <h3 class="w3-xxxlarge w3-text-white"><b>Fin<br>Secure</b></h3>
+        </a>
     </div>
-    <div class="container">
-        <div class="welcome-container">
-            <h1 th:text="${pageTitle}">Welcome to Online Banking</h1>
-            <p>Experience secure and convenient online banking services.</p>
+    <div class="w3-bar-block">
+        <a href="/login" class="w3-bar-item w3-button w3-hover-white"><b>Login</b></a>
+        <a href="#" class="w3-bar-item w3-button w3-hover-white">Home</a>
+        <a href="#aboutourbank" class="w3-bar-item w3-button w3-hover-white">About Our Bank</a>
+        <a href="#onlinebankingservices" class="w3-bar-item w3-button w3-hover-white">Online Banking Services</a>
+        <a href="#helpandfaq" class="w3-bar-item w3-button w3-hover-white">Help and FAQ</a>
+    </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+    <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+    <span>Fin Secure</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+    <!-- Header -->
+    <div class="w3-container" style="margin-top:80px" id="aboutourbank">
+        <h1 class="w3-jumbo"><b>Online Banking with FinSecure </b></h1>
+        <h1 class="w3-xxxlarge w3-text-red"><b>About Our Bank.</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-round">
+    </div>
+    
+    <!-- Photo grid (modal) -->
+    <div class="w3-row-padding">
+        <div class="w3-half">
+            <img th:src="@{/images/about-our-bank.jpg}" style="width:100%" onclick="onClick(this)" alt="About Our Bank">
+            <!-- Add your content here -->
+        </div>
+        <div class="w3-half">
+            <img th:src="@{/images/online-banking-services-image.jpg}" style="width:100%" onclick="onClick(this)" alt="Online Banking Services">
+            <!-- Add your content here -->
         </div>
     </div>
     
-    <!-- Information Sections -->
-    <div class="section" id="about-our-bank">
-        <h2><a href="/aboutourbank">About Our Bank</a></h2>
-        <!-- Remove the anchor tag around the description -->
-        <p class="description">Welcome to our trusted banking institution, where your financial well-being is our top priority. With a rich history of serving our community, we are committed to providing reliable and innovative banking solutions. Learn more about our mission and values as we continue to grow together with you.</p>
+    <!-- Modal for full-size images on click -->
+    <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+        <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+        <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+            <img id="img01" class="w3-image">
+            <p id="caption"></p>
+        </div>
     </div>
     
-    <div class="section" id="online-banking-services">
-        <h2><a href="/onlinebankingservices">Online Banking Services</a></h2>
-        <!-- Remove the anchor tag around the description -->
-        <p class="description">Learn how to bank online with ease. Manage your accounts, pay bills, and more from the comfort of your home.</p>
+    <!-- Designers -->
+    <div class="w3-container" id="onlinebankingservices" style="margin-top:75px">
+        <h1 class="w3-xxxlarge w3-text-red"><b>Our Services.</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-round">
+        <p>The best team in the world.</p>
+        <p>Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p><b>Our designers are thoughtfully chosen</b>:</p>
+        <!-- Add your content here -->
+    </div>
+
+    <!-- The Team -->
+    <div class="w3-row-padding w3-grayscale">
+        <div class="w3-col m4 w3-margin-bottom">
+            <div class="w3-light-grey">
+                <img th:src="@{/images/team2.jpg}" alt="John" style="width:100%">
+                <div class="w3-container">
+                    <h3>John Doe</h3>
+                    <p class="w3-opacity">CEO & Founder</p>
+                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col m4 w3-margin-bottom">
+            <div class="w3-light-grey">
+                <img th:src="@{/images/team1.jpg}" alt="Jane" style="width:100%">
+                <div class="w3-container">
+                    <h3>Jane Doe</h3>
+                    <p class="w3-opacity">Designer</p>
+                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col m4 w3-margin-bottom">
+            <div class="w3-light-grey">
+                <img th:src="@{/images/team3.jpg}" alt="Mike" style="width:100%">
+                <div class="w3-container">
+                    <h3>Mike Ross</h3>
+                    <p class="w3-opacity">Architect</p>
+                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Packages / Pricing Tables -->
+    <div class="w3-container" id="packages" style="margin-top:75px">
+        <h1 class="w3-xxxlarge w3-text-red"><b>Packages.</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-round">
+        <p>Some text about our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <!-- Add your content here -->
     </div>
     
-    <div class="section" id="customer-support">
-        <h2><a href="/customersupport">Customer Support</a></h2>
-        <!-- Remove the anchor tag around the description -->
-        <p class="description">If you need assistance, please call our support team at <strong>1-800-123-4567</strong>.</p>
+    <div class="w3-row-padding">
+        <div class="w3-half w3-margin-bottom">
+            <ul class="w3-ul w3-light-grey w3-center">
+                <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+                <li class="w3-padding-16">Floorplanning</li>
+                <li class="w3-padding-16">10 hours support</li>
+                <li class="w3-padding-16">Photography</li>
+                <li class="w3-padding-16">20% furniture discount</li>
+                <li class="w3-padding-16">Good deals</li>
+                <li class="w3-padding-16">
+                    <h2>$ 199</h2>
+                    <span class="w3-opacity">per room</span>
+                </li>
+                <li class="w3-light-grey w3-padding-24">
+                    <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+            
+        <div class="w3-half">
+            <ul class="w3-ul w3-light-grey w3-center">
+                <li class="w3-red w3-xlarge w3-padding-32">Pro</li>
+                <li class="w3-padding-16">Floorplanning</li>
+                <li class="w3-padding-16">50 hours support</li>
+                <li class="w3-padding-16">Photography</li>
+                <li class="w3-padding-16">50% furniture discount</li>
+                <li class="w3-padding-16">GREAT deals</li>
+                <li class="w3-padding-16">
+                    <h2>$ 249</h2>
+                    <span class="w3-opacity">per room</span>
+                </li>
+                <li class="w3-light-grey w3-padding-24">
+                    <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
+                </li>
+            </ul>
+        </div>
     </div>
     
-    <div class="section" id="help-faq">
-        <h2><a href="/helpfaq">Help and FAQ</a></h2>
-        <!-- Remove the anchor tag around the description -->
-        <p class="description">Find answers to common questions in our.</p>
+    <!-- Contact -->
+    <div class="w3-container" id="helpandfaq" style="margin-top:75px">
+        <h1 class="w3-xxxlarge w3-text-red"><b>Contact.</b></h1>
+        <hr style="width:50px;border:5px solid red" class="w3-round">
+        <p>Do you want us to style your home? Fill out the form and fill me in with the details We love meeting new people!</p>
+        <form action="/action_page.php" target="_blank">
+            <div class="w3-section">
+                <label>Name</label>
+                <input class="w3-input w3-border" type="text" name="Name" required>
+            </div>
+            <div class="w3-section">
+                <label>Email</label>
+                <input class="w3-input w3-border" type="text" name="Email" required>
+            </div>
+            <div class="w3-section">
+                <label>Message</label>
+                <input class="w3-input w3-border" type="text" name="Message" required>
+            </div>
+            <button type="submit" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Send Message</button>
+        </form>
     </div>
+</div>
+
+<script>
+    // Script to open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+     
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+
+    // Modal Image Gallery
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+    }
+</script>
 </body>
 </html>

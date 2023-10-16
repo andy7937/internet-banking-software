@@ -1,4 +1,4 @@
-package com.bankingservice.bank.controller;
+package com.bankingservice.bank.controller.html;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
