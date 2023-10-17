@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bankingservice.bank.entity.User;
 import com.bankingservice.bank.repository.UserRepository;
+import com.bankingservice.bank.utils.AccountUtils;
 
 @Controller
 public class AuthController {
@@ -33,9 +34,8 @@ public class AuthController {
             Model model) {
 
         User user = userRepository.findByUsername(username);
-
         // Check if the user exists and the password matches
-        if (user != null && password.trim().equals(user.getPassword().trim())) {
+        if (user != null && AccountUtils.verifyPassword(password, user.getPassword())) {
             // Passwords match; the user is authenticated.
             return "dashboard"; // Redirect to the dashboard.
         } else {

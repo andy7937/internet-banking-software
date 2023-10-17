@@ -28,7 +28,7 @@
         h1 {
             color: black; /* Use a bold blue color */
             margin-bottom: 20px;
-            font-family: "Tiempos Text", "Times New Roman", serif;
+            font-family: "Poppins", sans-serif;
             font-size: 36.5px;
             font-style: normal;
             font-weight: 700;
@@ -105,7 +105,7 @@
 </head>
 <body>
     <div class="logo-container">
-        <img th:src="@{/images/finlogo.jpg}" style="width: 25%" alt="About Our Bank">
+        <img th:src="@{/images/finlogo.png}" style="width: 25%" alt="About Our Bank">
     </div>
 
     <h1>Log in</h1>
@@ -118,7 +118,7 @@
 
         <button type="submit">Log In</button>
     </form>
-    <a class="signup-link" href="/signup">Don't have an account? Sign up here.</a>
+    <a class="register" href="/signup">Don't have an account? Sign up here.</a>
     <div id="error-message" class="error-message" th:text="${error}"></div>
 </body>
 </html>

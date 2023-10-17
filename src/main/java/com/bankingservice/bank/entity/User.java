@@ -40,7 +40,7 @@ public class User {
     private String accountNumber;
     private BigDecimal accountBalance;
     private String status;
-
+    
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

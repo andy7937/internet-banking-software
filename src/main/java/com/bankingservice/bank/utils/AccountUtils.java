@@ -1,9 +1,11 @@
 package com.bankingservice.bank.utils;
 
 import java.time.Year;
+ import org.mindrot.jbcrypt.BCrypt;
 
 public class AccountUtils {
 
+    
     public static final String ACCOUNT_ALREADY_EXISTS = "001";
     public static final String ACCOUNT_EXISTS_MESSAGE = "This email already has an account associated with it";
     public static final String ACCOUNT_SUCCESSFUL_CREATION = "002";
@@ -29,7 +31,33 @@ public class AccountUtils {
     return accountNumber;
     }
 
-  
+    // Hashing user password and storing the salt
+    public static String hashPassword(String password) {
+        String salt = BCrypt.gensalt();
+        String hashedPassword = BCrypt.hashpw(password, salt);
+        
+        // Combine the salt and hashed password into a single string
+        String saltedHashedPassword = salt + hashedPassword;
+        
+        return saltedHashedPassword;
+    }
 
+    // Verifying user login
+    public static boolean verifyPassword(String enteredPassword, String storedSaltedHashedPassword) {
+        // Extract the salt from the stored saltedHashedPassword
+        String storedSalt = storedSaltedHashedPassword.substring(0, 29); // The salt is the first 29 characters
+        
+        // Extract the stored hashed password (including the salt)
+        String storedHashedPassword = storedSaltedHashedPassword.substring(29);
+        
+        // Use the extracted salt to hash the entered password
+        String hashedPasswordToCheck = BCrypt.hashpw(enteredPassword, storedSalt);
+        
+        // Compare the newly generated hash with the stored hashed password
+        return hashedPasswordToCheck.equals(storedHashedPassword);
+    }
+
+
+   
 }
 

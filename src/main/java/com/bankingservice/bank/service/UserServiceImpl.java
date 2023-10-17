@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService{
                 .build();
         }
 
+        String password = AccountUtils.hashPassword(userRequest.getPassword());
+
         User newUser = User.builder()
             .firstName(userRequest.getFirstName())
             .lastName(userRequest.getLastName())
@@ -39,7 +41,7 @@ public class UserServiceImpl implements UserService{
             .phoneNumber(userRequest.getPhoneNumber())
             .email(userRequest.getEmail())
             .username(userRequest.getUsername())
-            .password(userRequest.getPassword())
+            .password(password)
             .address(userRequest.getAddress())
             .accountNumber(AccountUtils.generateAccountNumber())
             .accountBalance(BigDecimal.ZERO)
