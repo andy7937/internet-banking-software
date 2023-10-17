@@ -11,6 +11,9 @@
         body { font-size: 16px; }
         .w3-half img { margin-bottom: -6px; margin-top: 16px; opacity: 0.8; cursor: pointer; }
         .w3-half img:hover { opacity: 1; }
+        .custom-light-grey {
+        background-color: #dcdcdc; /* Adjust the color code to your preference */
+    }
     </style>
 </head>
 <body>
@@ -44,14 +47,13 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-    <!-- Header -->
-    <div class="w3-container" style="margin-top:80px" id="aboutourbank">
+    <!-- About Our Bank -->
+    <div class="w3-container w3-light-grey" style="margin-top:80px" id="aboutourbank">
         <h1 class="w3-jumbo"><b>Experience secure and convenient online banking services with FinSecure.</b></h1>
         <h1 class="w3-xxxlarge w3-text-red"><b>About Our Bank.</b></h1>
         <hr style="width:50px;border:5px solid red" class="w3-round">
     </div>
     
-    <!-- Photo grid (modal) -->
     <div class="w3-row-padding">
         <div class="w3-half">
             <img th:src="@{/images/about-our-bank.jpg}" style="width:75%" onclick="onClick(this)" alt="About Our Bank">
@@ -63,7 +65,6 @@
         </div>
     </div>
     
-    <!-- Modal for full-size images on click -->
     <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
         <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
         <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
@@ -72,14 +73,13 @@
         </div>
     </div>
     
-    <!-- Designers -->
+    <!-- Our Team -->
     <div class="w3-container" id="ourteam" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-red"><b>Our Team.</b></h1>
         <hr style="width:50px;border:5px solid red" class="w3-round">
         <p>The best team in the world.</p>
         <p>Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <p><b>Our designers are thoughtfully chosen</b>:</p>
-        <!-- Add your content here -->
     </div>
 
     <!-- The Team -->
@@ -116,7 +116,7 @@
         </div>
     </div>
 
-    <!-- Packages / Pricing Tables -->
+    <!-- Our Services -->
     <div class="w3-container" id="onlinebankingservices" style="margin-top:75px">
         <h1 class="w3-xxxlarge w3-text-red"><b>Our Services.</b></h1>
         <hr style="width:50px;border:5px solid red" class="w3-round">
