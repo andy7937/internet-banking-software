@@ -19,21 +19,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public EndPointResponse createUser(UserRequest userRequest) {
-        /**
-         * Creating new user account - save new user into the database
-         * check if user already exists
-         */
-
-        if (userRepository.existsByEmail(userRequest.getEmail())) {
-            return EndPointResponse.builder()
-                .responseCode(AccountUtils.ACCOUNT_ALREADY_EXISTS)
-                .responseMessage(AccountUtils.ACCOUNT_EXISTS_MESSAGE)
-                .accountInfo(null)
-                .build();
-        }
-
-        String password = AccountUtils.hashPassword(userRequest.getPassword());
-
+  
         User newUser = User.builder()
             .firstName(userRequest.getFirstName())
             .lastName(userRequest.getLastName())
@@ -41,7 +27,7 @@ public class UserServiceImpl implements UserService{
             .phoneNumber(userRequest.getPhoneNumber())
             .email(userRequest.getEmail())
             .username(userRequest.getUsername())
-            .password(password)
+            .password(AccountUtils.hashPassword(userRequest.getPassword()))
             .address(userRequest.getAddress())
             .accountNumber(AccountUtils.generateAccountNumber())
             .accountBalance(BigDecimal.ZERO)
