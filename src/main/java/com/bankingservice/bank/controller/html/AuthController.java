@@ -1,5 +1,7 @@
 package com.bankingservice.bank.controller.html;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +38,14 @@ public class AuthController {
     public String login(
             @RequestParam String username,
             @RequestParam String password,
-            Model model) {
+            Model model, HttpSession session) {
 
         User user = userRepository.findByUsername(username);
         // Check if the user exists and the password matches
         if (user != null && AccountUtils.verifyPassword(password, user.getPassword())) {
             // Passwords match; the user is authenticated.
-            return "dashboard"; // Redirect to the dashboard.
+            session.setAttribute("user", user);
+            return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "Incorrect username or password");
             return "login";

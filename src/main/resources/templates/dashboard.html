@@ -28,7 +28,7 @@
         line-height: 1.5;
         min-height: 100vh;
         font-family: "Be Vietnam Pro", sans-serif;
-        background-color: var(--c-gray-900);
+        background-color: var(--c-gray-800);
         color: var(--c-text-primary);
         display: flex;
         padding-top: 3vw;
@@ -857,7 +857,7 @@
             </div>
             <div class="app-header-actions">
               <button class="user-profile">
-                <span>Matheo Peterson</span>
+                <span th:text="${name}"></span>
                 <span>
                   <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
                 </span>
