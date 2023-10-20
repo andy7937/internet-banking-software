@@ -62,10 +62,14 @@ public class AuthController {
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String address,
+            @RequestParam String accountType,
+
             Model model
             ) {
 
-
+        // make the first letter of the first name and last name uppercase
+        firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
+        lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
 
         // Check if the email, username or phonenumber exists in the database
         if (!userRepository.existsByEmail(email)) {
@@ -80,7 +84,8 @@ public class AuthController {
                     userRequest.setUsername(username);
                     userRequest.setPassword(password);
                     userRequest.setAddress(address);
-                    userService.createUser(userRequest); // Call the createUser method from your service
+                    userRequest.setAccountType(accountType);
+                    userService.createUser(userRequest); 
                     return "home"; // Redirect to the login page.
                 }else{
                     model.addAttribute("error", "Phone number already exists");

@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService{
             .address(userRequest.getAddress())
             .accountNumber(AccountUtils.generateAccountNumber())
             .accountBalance(BigDecimal.ZERO)
+            .accountType(userRequest.getAccountType())
             .status("ACTIVE")
             .build();
 

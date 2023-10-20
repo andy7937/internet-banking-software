@@ -814,7 +814,6 @@
     textarea:focus,
     button:focus {
     outline: 0;
-    box-shadow: 0 0 0 2px var(--c-gray-800), 0 0 0 4px var(--c-gray-300);
     }
     </style>
 
@@ -822,17 +821,17 @@
       <body>
         <div class="app">
           <header class="app-header">
-            <div class="app-header-logo">
+            <a href="/home" class="app-header-logo" style="text-decoration: none;">
               <div class="logo">
-                <span class="logo-icon">
-                  <img src="https://assets.codepen.io/285131/almeria-logo.svg" />
-                </span>
-                <h1 class="logo-title">
-                  <span>Fin</span>
-                  <span>Secure</span>
-                </h1>
+                  <span class="logo-icon">
+                      <img th:src="@{/images/finlogoinverted.png}" style="max-width: 250%;"/>
+                  </span>
+                  <h1 class="logo-title">
+                      <span>Fin</span>
+                      <span>Secure</span>
+                  </h1>
               </div>
-            </div>
+          </a>
             <div class="app-header-navigation">
               <div class="tabs">
                 <a href="#">

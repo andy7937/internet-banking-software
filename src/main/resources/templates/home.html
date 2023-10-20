@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+    <link rel="icon" th:src="@{/images/favicon.png}" type="image/x-icon">
+    <link rel="shortcut icon" th:src="@{/images/favicon.png}" type="image/x-icon">
     <style>
         body, h1, h2, h3, h4, h5 { font-family: "Poppins", sans-serif; }
         body { font-size: 16px; }
@@ -27,6 +30,7 @@
     </div>
     <div class="w3-bar-block">
         <a href="/login" class="w3-bar-item w3-button w3-hover-white"><b>Login</b></a>
+        <a href="/register" class="w3-bar-item w3-button w3-hover-white"><b>Register</b></a>
         <a href="#" class="w3-bar-item w3-button w3-hover-white">Home</a>
         <a href="#aboutourbank" class="w3-bar-item w3-button w3-hover-white">About Our Bank</a>
         <a href="#ourteam" class="w3-bar-item w3-button w3-hover-white">Our Team</a>
@@ -78,39 +82,39 @@
         <h1 class="w3-xxxlarge w3-text-red"><b>Our Team.</b></h1>
         <hr style="width:50px;border:5px solid red" class="w3-round">
         <p>The best team in the world.</p>
-        <p>Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p><b>Our designers are thoughtfully chosen</b>:</p>
+        <p>Experts dedicated to delivering excellence in financial services.</p>
+        <p><b>Selected to deliver excellence in banking services</b>:</p>
     </div>
 
     <!-- The Team -->
     <div class="w3-row-padding w3-grayscale">
         <div class="w3-col m4 w3-margin-bottom">
             <div class="w3-light-grey">
-                <img th:src="@{/images/team2.jpg}" alt="John" style="width:100%">
+                <img th:src="@{/images/team1.jpg}" onclick="onClick(this)" alt="Andy" style="width:100%">
                 <div class="w3-container">
-                    <h3>John Doe</h3>
+                    <h3>Andy Lee</h3>
                     <p class="w3-opacity">CEO & Founder</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <p>Guided by our visionary CEO and Founder, we strive to deliver exceptional banking solutions that meet the evolving needs of our valued clients.</p>
                 </div>
             </div>
         </div>
         <div class="w3-col m4 w3-margin-bottom">
             <div class="w3-light-grey">
-                <img th:src="@{/images/team1.jpg}" alt="Jane" style="width:100%">
+                <img th:src="@{/images/team2.jpg}" onclick="onClick(this)" alt="Jason" style="width:100%">
                 <div class="w3-container">
-                    <h3>Jane Doe</h3>
-                    <p class="w3-opacity">Designer</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <h3>Jason Lee</h3>
+                    <p class="w3-opacity">Investor Manager</p>
+                    <p>As our dedicated Investor Manager, we expertly navigate the financial landscape, ensuring optimal returns.</p>
                 </div>
             </div>
         </div>
         <div class="w3-col m4 w3-margin-bottom">
             <div class="w3-light-grey">
-                <img th:src="@{/images/team3.jpg}" alt="Mike" style="width:100%">
+                <img th:src="@{/images/team3.jpg}" onclick="onClick(this)" alt="Dog" style="width:100%">
                 <div class="w3-container">
-                    <h3>Mike Ross</h3>
-                    <p class="w3-opacity">Architect</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <h3>Dog</h3>
+                    <p class="w3-opacity">Compliance Officer</p>
+                    <p>As our Compliance Officer, we safeguard our operations by ensuring that we meet all industry regulations and ethical standards.</p>
                 </div>
             </div>
         </div>
@@ -138,13 +142,12 @@
                     <span class="w3-opacity">with FinSecure One</span>
                 </li>
                 <li class="w3-light-grey w3-padding-24">
-                    <a href="/finsecureone">
-                    <button class="w3-button w3-dark-grey w3-padding-large w3-hover-black">Get Started</button>
+                    <a class="w3-button w3-dark-grey w3-padding-large w3-hover-black" href="/login">Get Started</a>
                    </a>
                 </li>
             </ul>
         </div>
-            
+        
         <div class="w3-half">
             <ul class="w3-ul w3-light-grey w3-center">
                 <li class="w3-red w3-xlarge w3-padding-32">FinSecure Commercial</li>
@@ -158,8 +161,7 @@
                     <span class="w3-opacity">with FinSecure Commercial</span>
                 </li>
                 <li class="w3-light-grey w3-padding-24">
-                    <a href="/finsecurecom">
-                        <button class="w3-button w3-red w3-padding-large w3-hover-black">Get Started</button>
+                        <a class="w3-button w3-red w3-padding-large w3-hover-black" href="/login">Get Started</a>
                     </a>
                 </li>
             </ul>

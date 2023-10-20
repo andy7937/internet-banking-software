@@ -39,6 +39,7 @@ public class User {
     private String address;
     private String accountNumber;
     private BigDecimal accountBalance;
+    private String accountType;
     private String status;
     
     @CreationTimestamp

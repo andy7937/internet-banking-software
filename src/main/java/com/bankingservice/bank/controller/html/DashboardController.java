@@ -2,11 +2,9 @@ package com.bankingservice.bank.controller.html;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bankingservice.bank.entity.User;
 
@@ -14,10 +12,9 @@ import com.bankingservice.bank.entity.User;
 public class DashboardController {
 
 
-    @PostMapping("/logout")
-    public String logout() {
-        // Perform any necessary logout actions (e.g., clearing user session).
-        return "home"; // Redirect to the "home.html" page.
+    @GetMapping("/home")
+    public String home() {
+        return "home"; 
     }
 
     // set dashboard to information about the user
@@ -36,6 +33,9 @@ public class DashboardController {
             return "login"; // Redirect to the login page or show an error message.
         }
     }
+
+
+
 
 
 
