@@ -25,8 +25,11 @@
 <nav class="w3-sidebar w3-dark-grey w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
     <br>
     <div class="w3-container">
-        <h3 class="w3-xxxlarge w3-text-white"><b>Fin<br>Secure</b></h3>
-        </a>
+        <div style="display: flex; align-items: center;">
+            <h3 class="w3-xxxlarge w3-text-white"><b>Fin</b></h3>
+            <img th:src="@{/images/finlogoinverted.png}" style="max-width: 45%; margin-left: 10px;" alt="About Our Bank">
+        </div>
+        <h3 class="w3-xxxlarge w3-text-white" style="text-align: left;"><b>Secure</b></h3>
     </div>
     <div class="w3-bar-block">
         <a href="/login" class="w3-bar-item w3-button w3-hover-white"><b>Login</b></a>
