@@ -10,6 +10,11 @@ public class AccountUtils {
     public static final String ACCOUNT_EXISTS_MESSAGE = "This email already has an account associated with it";
     public static final String ACCOUNT_SUCCESSFUL_CREATION = "002";
     public static final String ACCOUNT_SUCCESSFUL_CREATION_MESSAGE = "Account has been successfully created";
+    public static final String ACCOUNT_NOT_FOUND = "003";
+    public static final String ACCOUNT_NOT_FOUND_MESSAGE = "Account does not exist";
+    public static final String ACCOUNT_FOUND = "004";
+    public static final String ACCOUNT_FOUND_MESSAGE = "Account found";
+
     
     /**
      * curreent year followed by random 6 digits

@@ -38,7 +38,10 @@ public class User {
     private String password;
     private String address;
     private String accountNumber;
-    private BigDecimal accountBalance;
+    private BigDecimal accountChequings;
+    private BigDecimal accountSavings;
+    private BigDecimal accountCredit;
+
     private String accountType;
     private String status;
     
