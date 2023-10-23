@@ -6,7 +6,7 @@
         body {
             font-family: "Poppins", sans-serif;
             background: linear-gradient(to right, grey 0%, white 100%);
-            margin: 0; /* Remove default margin */
+            margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
@@ -29,7 +29,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column; /* Stack elements vertically */
+            flex-direction: column;
         }
 
         h2 {
@@ -49,7 +49,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
 
         form {
@@ -85,7 +84,6 @@
         }
 
         input[type="submit"] {
-            box-sizing: border-box;
             cursor: pointer;
             display: inline-block;
             position: center;
@@ -93,13 +91,12 @@
             transition: all 0.3s ease-out 0s;
             font-family: "National 2", "Source Sans Pro", system-ui, sans-serif;
             font-size: 1rem;
-            font-style: normal;
             font-weight: 500;
             line-height: 1.5;
             letter-spacing: 0px;
             color: rgb(255, 255, 255);
             background-color: blue;
-            border: 0px;
+            border: 0;
             border-radius: 62.5rem;
             box-shadow: none;
             min-width: 120px;
@@ -113,11 +110,12 @@
         .error {
             color: red;
             font-weight: bold;
-            margin-top: 10px;
         }
 
         .error-message {
-            margin-bottom: 200px; /* Add margin to separate from the form */
+            font-size: 12px;
+            color: red;
+            margin-top: 5px; /* Adjust margin as needed */
         }
     </style>
 </head>
@@ -141,16 +139,23 @@
             <input type="number" id="age" name="age" required><br>
 
             <label for="phoneNumber">Phone Number:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" required><br>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+            <div class="error-message" th:text="${errorphone}"></div>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+            <input type="email" id="email" name="email" required>
+            <div class="error-message" th:text="${erroremail}"></div>
 
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+            <input type="text" id="username" name="username" required>
+            <div class="error-message" th:text="${errorusername}"></div>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div class="error-message" th:text="${errorpassword}"></div>
 
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" required><br>
@@ -165,7 +170,6 @@
             <input type="submit" value="Register">
         </form>
         <a class="login" href="/login">Already have an account? Login here.</a>
-        <div id="error-message" class="error-message" th:text="${error}"></div>
     </div>
 </body>
 </html>
