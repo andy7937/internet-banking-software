@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.bankingservice.bank.dto.AccountInfo;
 import com.bankingservice.bank.dto.EndPointResponse;
 import com.bankingservice.bank.dto.EnquiryRequest;
+import com.bankingservice.bank.dto.TranferRequest;
 import com.bankingservice.bank.dto.UserRequest;
 import com.bankingservice.bank.entity.User;
 import com.bankingservice.bank.repository.UserRepository;
@@ -89,6 +90,32 @@ public class UserServiceImpl implements UserService{
         }
         User foundUser = userRepository.findByAccountNumber(Request.getAccountNumber());
         return foundUser.getFirstName() + " " + foundUser.getLastName();
+    }
+
+    @Override
+    public String tranferMoney(TranferRequest Request){
+        AccountInfo senderAccountInfo = (Request.getAccountSender());
+        AccountInfo receiverAccountInfo = (Request.getAccountReceiver());
+
+        User sender = userRepository.findByAccountNumber(senderAccountInfo.getAccountNumber());
+        User receiver = userRepository.findByAccountNumber(receiverAccountInfo.getAccountNumber());
+        String sendAccount = Request.getSendAccount();
+        String receiveAccount = Request.getReceiveAccount();
+        BigDecimal tranferAmount = new BigDecimal(Request.getAmount());
+
+
+
+        boolean isAccountSenderExists = userRepository.existsByAccountNumber(Request.getAccountSender().getAccountNumber());
+        boolean isAccountReceiverExists = userRepository.existsByAccountNumber(Request.getAccountReceiver().getAccountNumber());
+
+         if (!isAccountSenderExists || !isAccountReceiverExists){ 
+            return AccountUtils.ACCOUNT_NOT_FOUND;
+        }
+
+
+        return null;
+
+
     }
 
     

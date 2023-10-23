@@ -10,6 +10,7 @@ public interface UserService {
     EndPointResponse createUser(UserRequest userRequest);
     EndPointResponse balanceEnquiry(EnquiryRequest Request);
     String nameEnquiry(EnquiryRequest Request);
+    String tranferMoney(TranferRequest Request);
 
 }
 

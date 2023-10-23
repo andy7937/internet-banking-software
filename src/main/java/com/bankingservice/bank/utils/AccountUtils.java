@@ -14,6 +14,9 @@ public class AccountUtils {
     public static final String ACCOUNT_NOT_FOUND_MESSAGE = "Account does not exist";
     public static final String ACCOUNT_FOUND = "004";
     public static final String ACCOUNT_FOUND_MESSAGE = "Account found";
+    public static final String INSUFFICIENT_FUNDS = "005";
+    public static final String INSUFFICIENT_FUNDS_MESSAGE = "Insufficient funds to tranfer";
+
 
     
     /**

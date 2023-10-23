@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bankingservice.bank.dto.EndPointResponse;
 import com.bankingservice.bank.dto.EnquiryRequest;
+import com.bankingservice.bank.dto.TranferRequest;
 import com.bankingservice.bank.dto.UserRequest;
 import com.bankingservice.bank.service.UserService;
 
@@ -33,4 +34,10 @@ public class UserController {
     public String nameEnquiry(@RequestBody EnquiryRequest userRequest) {
         return userService.nameEnquiry(userRequest);
     }
+
+    @GetMapping("/tranferMoney")
+    public String tranferMoney(@RequestBody TranferRequest userRequest) {
+        return userService.tranferMoney(userRequest);
+    }
+
 }
