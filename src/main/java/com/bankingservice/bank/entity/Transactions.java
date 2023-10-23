@@ -28,7 +28,6 @@ public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String accountNumber;
     private String accountSender;
     private String accountReceiver;

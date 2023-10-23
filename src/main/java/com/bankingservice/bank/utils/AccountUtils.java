@@ -1,5 +1,6 @@
 package com.bankingservice.bank.utils;
 
+import java.math.BigDecimal;
 import java.time.Year;
  import org.mindrot.jbcrypt.BCrypt;
 
@@ -16,6 +17,8 @@ public class AccountUtils {
     public static final String ACCOUNT_FOUND_MESSAGE = "Account found";
     public static final String INSUFFICIENT_FUNDS = "005";
     public static final String INSUFFICIENT_FUNDS_MESSAGE = "Insufficient funds to tranfer";
+    public static final String ACCOUNT_TRANSFER_SUCCESSFUL = "006";
+    public static final String ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE = "Account transfer successful";
 
 
     
@@ -64,6 +67,16 @@ public class AccountUtils {
         // Compare the newly generated hash with the stored hashed password
         return hashedPasswordToCheck.equals(storedHashedPassword);
     }
+
+    public static Boolean isTranferPossible(BigDecimal storedMoney, BigDecimal takeMoney) {
+        int comparison = storedMoney.compareTo(takeMoney);
+        if (comparison >= 0) {
+            return true; // storedMoney is greater than or equal to takeMoney
+        }
+        return false; // storedMoney is less than takeMoney
+    }
+
+
 
 
    

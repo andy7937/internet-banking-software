@@ -100,23 +100,37 @@ public class UserServiceImpl implements UserService{
         User sender = userRepository.findByAccountNumber(senderAccountInfo.getAccountNumber());
         User receiver = userRepository.findByAccountNumber(receiverAccountInfo.getAccountNumber());
         String sendAccount = Request.getSendAccount();
-        String receiveAccount = Request.getReceiveAccount();
         BigDecimal tranferAmount = new BigDecimal(Request.getAmount());
-
-
 
         boolean isAccountSenderExists = userRepository.existsByAccountNumber(Request.getAccountSender().getAccountNumber());
         boolean isAccountReceiverExists = userRepository.existsByAccountNumber(Request.getAccountReceiver().getAccountNumber());
 
          if (!isAccountSenderExists || !isAccountReceiverExists){ 
-            return AccountUtils.ACCOUNT_NOT_FOUND;
+            return AccountUtils.ACCOUNT_NOT_FOUND_MESSAGE;
         }
 
+        if ("cheque".equals(sendAccount)){
+            if (AccountUtils.isTranferPossible(sender.getAccountChequings(), tranferAmount)){
+                sender.setAccountChequings(sender.getAccountChequings().subtract(tranferAmount));
+                receiver.setAccountChequings(receiver.getAccountChequings().add(tranferAmount));
+                return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
+            }
+        }
+        else if ("savings".equals(sendAccount)){
+            if (AccountUtils.isTranferPossible(sender.getAccountSavings(), tranferAmount)){
+                sender.setAccountSavings(sender.getAccountSavings().subtract(tranferAmount));
+                receiver.setAccountSavings(receiver.getAccountSavings().add(tranferAmount));
+                return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
+            }
+        }
+        else{
+            if (AccountUtils.isTranferPossible(sender.getAccountCredit(), tranferAmount)){
+                sender.setAccountCredit(sender.getAccountCredit().subtract(tranferAmount));
+                receiver.setAccountCredit(receiver.getAccountCredit().add(tranferAmount));
+                return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
+            }
 
-        return null;
-
-
+        }
+        return AccountUtils.INSUFFICIENT_FUNDS_MESSAGE;
     }
-
-    
 }
