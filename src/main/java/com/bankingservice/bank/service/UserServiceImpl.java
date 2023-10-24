@@ -99,38 +99,51 @@ public class UserServiceImpl implements UserService{
 
         User sender = userRepository.findByAccountNumber(senderAccountInfo.getAccountNumber());
         User receiver = userRepository.findByAccountNumber(receiverAccountInfo.getAccountNumber());
-        String sendAccount = Request.getSendAccount();
+        String chooseAccount = Request.getSendAccount();
         BigDecimal tranferAmount = new BigDecimal(Request.getAmount());
 
-        boolean isAccountSenderExists = userRepository.existsByAccountNumber(Request.getAccountSender().getAccountNumber());
-        boolean isAccountReceiverExists = userRepository.existsByAccountNumber(Request.getAccountReceiver().getAccountNumber());
+        boolean isAccountSenderExists = userRepository.existsByAccountNumber(sender.getAccountNumber());
+        boolean isAccountReceiverExists = userRepository.existsByAccountNumber(receiver.getAccountNumber());
 
          if (!isAccountSenderExists || !isAccountReceiverExists){ 
             return AccountUtils.ACCOUNT_NOT_FOUND_MESSAGE;
         }
 
-        if ("cheque".equals(sendAccount)){
+        if ("cheque".equals(chooseAccount)){
             if (AccountUtils.isTranferPossible(sender.getAccountChequings(), tranferAmount)){
                 sender.setAccountChequings(sender.getAccountChequings().subtract(tranferAmount));
-                receiver.setAccountChequings(receiver.getAccountChequings().add(tranferAmount));
+                receiveAdd(tranferAmount, receiver, Request.getReceiveAccount());
                 return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
             }
         }
-        else if ("savings".equals(sendAccount)){
+        else if ("savings".equals(chooseAccount)){
             if (AccountUtils.isTranferPossible(sender.getAccountSavings(), tranferAmount)){
                 sender.setAccountSavings(sender.getAccountSavings().subtract(tranferAmount));
-                receiver.setAccountSavings(receiver.getAccountSavings().add(tranferAmount));
+                receiveAdd(tranferAmount, receiver, Request.getReceiveAccount());
                 return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
             }
         }
         else{
             if (AccountUtils.isTranferPossible(sender.getAccountCredit(), tranferAmount)){
                 sender.setAccountCredit(sender.getAccountCredit().subtract(tranferAmount));
-                receiver.setAccountCredit(receiver.getAccountCredit().add(tranferAmount));
+                receiveAdd(tranferAmount, receiver, Request.getReceiveAccount());
                 return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
             }
 
         }
         return AccountUtils.INSUFFICIENT_FUNDS_MESSAGE;
+    }
+
+    public void receiveAdd(BigDecimal amount, User receiver, String accountType){
+        if ("cheque".equals(accountType)){
+            receiver.setAccountChequings(receiver.getAccountChequings().add(amount));
+        }
+        else if ("savings".equals(accountType)){
+            receiver.setAccountSavings(receiver.getAccountSavings().add(amount));
+        }
+        else{
+            receiver.setAccountCredit(receiver.getAccountCredit().add(amount));
+        }
+
     }
 }
