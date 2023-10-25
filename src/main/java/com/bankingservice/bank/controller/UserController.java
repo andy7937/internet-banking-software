@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankingservice.bank.dto.AddRequest;
 import com.bankingservice.bank.dto.EndPointResponse;
 import com.bankingservice.bank.dto.EnquiryRequest;
 import com.bankingservice.bank.dto.TranferRequest;
@@ -35,8 +36,13 @@ public class UserController {
         return userService.nameEnquiry(userRequest);
     }
 
-    @GetMapping("/tranferMoney")
-    public String tranferMoney(@RequestBody TranferRequest userRequest) {
+    @PostMapping("/addMoney")
+        public EndPointResponse addMoney(@RequestBody AddRequest userRequest) {
+        return userService.addMoney(userRequest);
+    }
+
+    @PostMapping("/tranferMoney")
+    public EndPointResponse tranferMoney(@RequestBody TranferRequest userRequest) {
         return userService.tranferMoney(userRequest);
     }
 

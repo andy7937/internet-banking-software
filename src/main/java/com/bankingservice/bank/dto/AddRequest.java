@@ -1,5 +1,7 @@
 package com.bankingservice.bank.dto;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 
-public class TranferRequest {
-    private String accountSender;
-    private String accountReceiver;
-    private String amount;
-    private String sendAccount;
-    private String receiveAccount;
+public class AddRequest {
+    private String accountNumber;
+    private BigDecimal amount;
+    private String accountType;
 }

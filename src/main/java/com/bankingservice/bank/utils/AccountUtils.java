@@ -2,10 +2,11 @@ package com.bankingservice.bank.utils;
 
 import java.math.BigDecimal;
 import java.time.Year;
- import org.mindrot.jbcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
+
+import com.bankingservice.bank.entity.User;
 
 public class AccountUtils {
-
     
     public static final String ACCOUNT_ALREADY_EXISTS = "001";
     public static final String ACCOUNT_EXISTS_MESSAGE = "This email already has an account associated with it";
@@ -19,6 +20,8 @@ public class AccountUtils {
     public static final String INSUFFICIENT_FUNDS_MESSAGE = "Insufficient funds to tranfer";
     public static final String ACCOUNT_TRANSFER_SUCCESSFUL = "006";
     public static final String ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE = "Account transfer successful";
+    public static final String ACCOUNT_ADD_SUCCESSFUL = "007";
+    public static final String ACCOUNT_ADD_SUCCESSFUL_MESSAGE = "Account add successful";
 
 
     
@@ -76,9 +79,17 @@ public class AccountUtils {
         return false; // storedMoney is less than takeMoney
     }
 
+        public static void receiveAdd(BigDecimal amount, User receiver, String accountType){
+        if ("cheque".equals(accountType)){
+            receiver.setAccountChequings(receiver.getAccountChequings().add(amount));
+        }
+        else if ("savings".equals(accountType)){
+            receiver.setAccountSavings(receiver.getAccountSavings().add(amount));
+        }
+        else{
+            receiver.setAccountCredit(receiver.getAccountCredit().add(amount));
+        }
 
-
-
-   
+    }
 }
 

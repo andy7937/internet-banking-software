@@ -2,9 +2,11 @@ package com.bankingservice.bank.service;
 
 import java.math.BigDecimal;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bankingservice.bank.dto.AccountInfo;
+import com.bankingservice.bank.dto.AddRequest;
 import com.bankingservice.bank.dto.EndPointResponse;
 import com.bankingservice.bank.dto.EnquiryRequest;
 import com.bankingservice.bank.dto.TranferRequest;
@@ -93,57 +95,132 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String tranferMoney(TranferRequest Request){
-        AccountInfo senderAccountInfo = (Request.getAccountSender());
-        AccountInfo receiverAccountInfo = (Request.getAccountReceiver());
+    public EndPointResponse tranferMoney(TranferRequest Request){
 
-        User sender = userRepository.findByAccountNumber(senderAccountInfo.getAccountNumber());
-        User receiver = userRepository.findByAccountNumber(receiverAccountInfo.getAccountNumber());
+        User sender = userRepository.findByAccountNumber(Request.getAccountSender());
+        User receiver = userRepository.findByAccountNumber(Request.getAccountReceiver());
         String chooseAccount = Request.getSendAccount();
+        String receiveAccount = Request.getReceiveAccount();
         BigDecimal tranferAmount = new BigDecimal(Request.getAmount());
 
         boolean isAccountSenderExists = userRepository.existsByAccountNumber(sender.getAccountNumber());
         boolean isAccountReceiverExists = userRepository.existsByAccountNumber(receiver.getAccountNumber());
 
          if (!isAccountSenderExists || !isAccountReceiverExists){ 
-            return AccountUtils.ACCOUNT_NOT_FOUND_MESSAGE;
+                        return EndPointResponse.builder()
+        .responseCode(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL)
+        .responseMessage(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE)
+        .accountInfo(AccountInfo.builder()
+            .accountChequings(sender.getAccountChequings())
+            .accountSavings(sender.getAccountSavings())
+            .accountCredit(sender.getAccountCredit())
+            .accountNumber(sender.getAccountNumber())
+            .name(sender.getFirstName() + " " + sender.getLastName())
+            .build())
+        .build();
         }
 
         if ("cheque".equals(chooseAccount)){
             if (AccountUtils.isTranferPossible(sender.getAccountChequings(), tranferAmount)){
                 sender.setAccountChequings(sender.getAccountChequings().subtract(tranferAmount));
-                receiveAdd(tranferAmount, receiver, Request.getReceiveAccount());
-                return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
+                AccountUtils.receiveAdd(tranferAmount, receiver, receiveAccount);
+                userRepository.save(sender);
+                userRepository.save(receiver);
+
+                        return EndPointResponse.builder()
+        .responseCode(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL)
+        .responseMessage(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE)
+        .accountInfo(AccountInfo.builder()
+            .accountChequings(sender.getAccountChequings())
+            .accountSavings(sender.getAccountSavings())
+            .accountCredit(sender.getAccountCredit())
+            .accountNumber(sender.getAccountNumber())
+            .name(sender.getFirstName() + " " + sender.getLastName())
+            .build())
+        .build();
             }
         }
         else if ("savings".equals(chooseAccount)){
             if (AccountUtils.isTranferPossible(sender.getAccountSavings(), tranferAmount)){
                 sender.setAccountSavings(sender.getAccountSavings().subtract(tranferAmount));
-                receiveAdd(tranferAmount, receiver, Request.getReceiveAccount());
-                return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
+                AccountUtils.receiveAdd(tranferAmount, receiver, receiveAccount);
+                userRepository.save(sender);
+                userRepository.save(receiver);
+
+                        return EndPointResponse.builder()
+        .responseCode(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL)
+        .responseMessage(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE)
+        .accountInfo(AccountInfo.builder()
+            .accountChequings(sender.getAccountChequings())
+            .accountSavings(sender.getAccountSavings())
+            .accountCredit(sender.getAccountCredit())
+            .accountNumber(sender.getAccountNumber())
+            .name(sender.getFirstName() + " " + sender.getLastName())
+            .build())
+        .build();
             }
         }
         else{
             if (AccountUtils.isTranferPossible(sender.getAccountCredit(), tranferAmount)){
                 sender.setAccountCredit(sender.getAccountCredit().subtract(tranferAmount));
-                receiveAdd(tranferAmount, receiver, Request.getReceiveAccount());
-                return AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE;
+                AccountUtils.receiveAdd(tranferAmount, receiver, receiveAccount);
+                userRepository.save(sender);
+                userRepository.save(receiver);
+
+                          return EndPointResponse.builder()
+        .responseCode(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL)
+        .responseMessage(AccountUtils.ACCOUNT_TRANSFER_SUCCESSFUL_MESSAGE)
+        .accountInfo(AccountInfo.builder()
+            .accountChequings(sender.getAccountChequings())
+            .accountSavings(sender.getAccountSavings())
+            .accountCredit(sender.getAccountCredit())
+            .accountNumber(sender.getAccountNumber())
+            .name(sender.getFirstName() + " " + sender.getLastName())
+            .build())
+        .build();
             }
+        }
 
-        }
-        return AccountUtils.INSUFFICIENT_FUNDS_MESSAGE;
-    }
 
-    public void receiveAdd(BigDecimal amount, User receiver, String accountType){
-        if ("cheque".equals(accountType)){
-            receiver.setAccountChequings(receiver.getAccountChequings().add(amount));
-        }
-        else if ("savings".equals(accountType)){
-            receiver.setAccountSavings(receiver.getAccountSavings().add(amount));
-        }
-        else{
-            receiver.setAccountCredit(receiver.getAccountCredit().add(amount));
-        }
+        return EndPointResponse.builder()
+                    .responseCode(AccountUtils.INSUFFICIENT_FUNDS)
+                    .responseMessage(AccountUtils.INSUFFICIENT_FUNDS_MESSAGE)
+                    .accountInfo(null)
+                .build();
+        
 
     }
+
+    @Override
+    public EndPointResponse addMoney(AddRequest Request){
+
+        boolean isAccountExists = userRepository.existsByAccountNumber(Request.getAccountNumber());
+
+        if (!isAccountExists){
+            return EndPointResponse.builder()
+                .responseCode(AccountUtils.ACCOUNT_NOT_FOUND)
+                .responseMessage(AccountUtils.ACCOUNT_NOT_FOUND_MESSAGE)
+                .accountInfo(null)
+                .build();
+        }
+        
+        User foundUser = userRepository.findByAccountNumber(Request.getAccountNumber());
+
+        AccountUtils.receiveAdd(Request.getAmount(), foundUser, Request.getAccountType());
+        userRepository.save(foundUser);
+        
+
+         return EndPointResponse.builder()
+        .responseCode(AccountUtils.ACCOUNT_ADD_SUCCESSFUL)
+        .responseMessage(AccountUtils.ACCOUNT_ADD_SUCCESSFUL_MESSAGE)
+        .accountInfo(AccountInfo.builder()
+            .accountChequings(foundUser.getAccountChequings())
+            .accountSavings(foundUser.getAccountSavings())
+            .accountCredit(foundUser.getAccountCredit())
+            .accountNumber(foundUser.getAccountNumber())
+            .name(foundUser.getFirstName() + " " + foundUser.getLastName())
+            .build())
+        .build();
+    }
+
 }
