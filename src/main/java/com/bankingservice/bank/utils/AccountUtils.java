@@ -3,8 +3,10 @@ package com.bankingservice.bank.utils;
 import java.math.BigDecimal;
 import java.time.Year;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bankingservice.bank.entity.User;
+import com.bankingservice.bank.repository.UserRepository;
 
 public class AccountUtils {
     
@@ -28,7 +30,7 @@ public class AccountUtils {
     /**
      * curreent year followed by random 6 digits
      */
-    public static String generateAccountNumber() {
+    public static String generateAccountNumber(UserRepository userRepository) {
 
     Year currentYear = Year.now();
     int min = 100000;
@@ -42,6 +44,11 @@ public class AccountUtils {
 
     String accountNumber = year + randomnum;
 
+    boolean isAccountExists = userRepository.existsByAccountNumber(accountNumber);
+
+    if (isAccountExists){
+        return generateAccountNumber(userRepository);
+    }
     return accountNumber;
     }
 

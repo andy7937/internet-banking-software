@@ -2,7 +2,6 @@ package com.bankingservice.bank.service;
 
 import java.math.BigDecimal;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bankingservice.bank.dto.AccountInfo;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService{
             .username(userRequest.getUsername())
             .password(AccountUtils.hashPassword(userRequest.getPassword()))
             .address(userRequest.getAddress())
-            .accountNumber(AccountUtils.generateAccountNumber())
+            .accountNumber(AccountUtils.generateAccountNumber(userRepository))
             .accountChequings(BigDecimal.ZERO)
             .accountSavings(BigDecimal.ZERO)
             .accountCredit(BigDecimal.ZERO)
