@@ -833,8 +833,68 @@
                             <h2>Transfer Funds</h2>
                         </div>
                         <div class="transfers">
-                            <!-- Add transfer-related content here -->
-                            <!-- Example: Transfer form, card selection, recipient details, etc. -->
+                            <div class="payments">
+                                <div class="payment">
+                                  <div class="card green">
+                                    <span>01/22</span>
+                                    <span>
+                                      •••• 4012
+                                    </span>
+                                  </div>
+                                  <div class="payment-details">
+                                    <h3>Chequings Account</h3>
+                                    <div>
+                                      <span th:text="${chequings}"></span>
+                                      <form action="/transfer" method="post">
+                                        <input type="hidden" name="cardType" value="cheque">
+                                        <button type="submit" class="icon-button">
+                                          <i class="ph-caret-right-bold"></i> 
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="payment">
+                                  <div class="card olive">
+                                    <span>12/23</span>
+                                    <span>
+                                      •••• 2228
+                                    </span>
+                                  </div>
+                                  <div class="payment-details">
+                                    <h3>Savings Account</h3>
+                                    <div>
+                                      <span th:text="${savings}"></span>
+                                      <form action="/transfer" method="post">
+                                        <input type="hidden" name="cardType" value="savings">
+                                        <button type="submit" class="icon-button">
+                                          <i class="ph-caret-right-bold"></i> 
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="payment">
+                                  <div class="card gray">
+                                    <span>03/22</span>
+                                    <span>
+                                      •••• 5214
+                                    </span>
+                                  </div>
+                                  <div class="payment-details">
+                                    <h3>Savings On Call</h3>
+                                    <div>
+                                      <span th:text="${credit}"></span>
+                                      <form action="/transfer" method="post">
+                                        <input type="hidden" name="cardType" value="credit">
+                                        <button type="submit" class="icon-button">
+                                          <i class="ph-caret-right-bold"></i> 
+                                        </button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                         </div>
                     </section>
                 </div>

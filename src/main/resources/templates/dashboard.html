@@ -889,7 +889,7 @@
                   <i class="ph-check-square"></i>
                   <span>Scheduled</span>
                 </a>
-                <a href="#">
+                <a href="/transfer">
                   <i class="ph-swap"></i>
                   <span>Transfers</span>
                 </a>
@@ -1110,8 +1110,8 @@
                       <h3>Chequings Account</h3>
                       <div>
                         <span th:text="${chequings}"></span>
-                        <a href="/transfer?type=cheque" class="icon-button">
-                          <i class="ph-caret-right-bold"></i> 
+                        <a href="/transfer?cardType=cheque" class="icon-button">
+                          <i class="ph-caret-right-bold"></i>
                         </a>
                       </div>
                     </div>
@@ -1127,8 +1127,8 @@
                       <h3>Savings Account</h3>
                       <div>
                         <span th:text="${savings}"></span>
-                        <a href="/transfer?type=savings" class="icon-button">
-                          <i class="ph-caret-right-bold"></i> 
+                        <a href="/transfer?cardType=savings" class="icon-button">
+                          <i class="ph-caret-right-bold"></i>
                         </a>
                       </div>
                     </div>
@@ -1144,8 +1144,8 @@
                       <h3>Savings On Call</h3>
                       <div>
                         <span th:text="${credit}"></span>
-                        <a href="/transfer?type=credit" class="icon-button">
-                          <i class="ph-caret-right-bold"></i> 
+                        <a href="/transfer?cardType=credit" class="icon-button">
+                          <i class="ph-caret-right-bold"></i>
                         </a>
                       </div>
                     </div>

@@ -52,8 +52,8 @@ public class DashboardController {
 
             return "dashboard"; // Return the Thymeleaf template
         } else {
-            // Handle cases where the user is not authenticated or the session is not set.
-            return "login"; // Redirect to the login page or show an error message.
+
+            return "redirect:/login"; // Redirect to the login page or show an error message.
         }
     }
 
