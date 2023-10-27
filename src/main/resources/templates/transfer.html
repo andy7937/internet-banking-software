@@ -817,24 +817,25 @@
     outline: 0;
     }
     </style>
-    </head>
-    <body>
-        <div class="app">
-            <header class="app-header">
-                <!-- Header content similar to your dashboard -->
-            </header>
-            <div class="app-body">
-                <div class="app-body-navigation">
-                    <!-- Navigation menu similar to your dashboard -->
-                </div>
-                <div class="app-body-main-content">
-                    <section class="transfer-section">
-                        <div class="transfer-section-header">
-                            <h2>Transfer Funds</h2>
-                        </div>
-                        <div class="transfers">
-                            <div class="payments">
-                                <div class="payment">
+        </head>
+        <body>
+          <div class="app">
+              <header class="app-header">
+                  <!-- Header content similar to your dashboard -->
+              </header>
+              <div class="app-body">
+                  <div class="app-body-navigation">
+                      <!-- Navigation menu similar to your dashboard -->
+                  </div>
+                  <div class="app-body-main-content">
+                      <section class="transfer-section">
+                          <div class="transfer-section-header">
+                              <h2>Transfer Funds</h2>
+                          </div>
+                          <div class="transfers">
+                              <!-- Step 1: Choose accountTypeSend -->
+                              <div class="payments">
+                                <div class="payment" id="chequePayment">
                                   <div class="card green">
                                     <span>01/22</span>
                                     <span>
@@ -845,16 +846,11 @@
                                     <h3>Chequings Account</h3>
                                     <div>
                                       <span th:text="${chequings}"></span>
-                                      <form action="/transfer" method="post">
-                                        <input type="hidden" name="cardType" value="cheque">
-                                        <button type="submit" class="icon-button">
-                                          <i class="ph-caret-right-bold"></i> 
-                                        </button>
-                                      </form>
+                                      <button type="button" class="icon-button" onclick="showNextStep('cheque')"><i class="ph-caret-right-bold"></i> </button>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="payment">
+                                <div class="payment" id="savingsPayment">
                                   <div class="card olive">
                                     <span>12/23</span>
                                     <span>
@@ -865,16 +861,12 @@
                                     <h3>Savings Account</h3>
                                     <div>
                                       <span th:text="${savings}"></span>
-                                      <form action="/transfer" method="post">
-                                        <input type="hidden" name="cardType" value="savings">
-                                        <button type="submit" class="icon-button">
-                                          <i class="ph-caret-right-bold"></i> 
-                                        </button>
-                                      </form>
+                                      <button type="button" class="icon-button" onclick="showNextStep('savings')"><i class="ph-caret-right-bold"></i> </button>
+                                    </div>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="payment">
+                                <div class="payment" id="creditPayment">
                                   <div class="card gray">
                                     <span>03/22</span>
                                     <span>
@@ -885,26 +877,61 @@
                                     <h3>Savings On Call</h3>
                                     <div>
                                       <span th:text="${credit}"></span>
-                                      <form action="/transfer" method="post">
-                                        <input type="hidden" name="cardType" value="credit">
-                                        <button type="submit" class="icon-button">
-                                          <i class="ph-caret-right-bold"></i> 
-                                        </button>
-                                      </form>
+                                      <button type="button" class="icon-button" onclick="showNextStep('credit')"><i class="ph-caret-right-bold"></i> </button>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                        </div>
-                    </section>
-                </div>
-                <div class="app-body-sidebar">
-                    <section class="payment-section">
-                        <!-- Payment section similar to your dashboard -->
-                    </section>
-                </div>
-            </div>
-        </div>
-        <script src="https://unpkg.com/phosphor-icons"></script>
-    </body>
-    </html>
+                                  <!-- Other payment options go here -->
+                              </div>
+                          </div>
+                      </section>
+                      <section class="transfer-section" id="nextStep" style="display: none;">
+                          <div class="transfer-section-header">
+                              <h2>Transfer Funds</h2>
+                          </div>
+                          <div class="transfers">
+                              <!-- Step 2: Enter accountNumber, amount, and choose accountTypeReceive -->
+                              <form action="/transfer" method="get">
+                                  <div class="user-account">
+                                      <label for="accountNumber">User Account Number:</label>
+                                      <input type="text" id="accountNumber" name="accountNumber">
+                                  </div>
+                                  <div class="amount">
+                                      <label for="amount">Amount to Send:</label>
+                                      <input type="text" id="amount" name="amount">
+                                  </div>
+                                  <div class="account-selection">
+                                      <p>Select Account Type:</p>
+                                      <div class="account-options">
+                                          <input type="radio" id="chequeReceive" name="accountTypeReceive" value="cheque">
+                                          <label for="cheque">Cheque</label>
+                                          <input type="radio" id="savingsReceive" name="accountTypeReceive" value="savings">
+                                          <label for="savings">Savings</label>
+                                          <input type="radio" id="creditReceive" name="accountTypeReceive" value="credit">
+                                          <label for="credit">Credit</label>
+                                      </div>
+                                  </div>
+                                  <input type="submit" value="Submit">
+                              </form>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="app-body-sidebar">
+                      <section class="payment-section">
+                          <!-- Payment section similar to your dashboard -->
+                      </section>
+                  </div>
+              </div>
+          </div>
+          <script src="https://unpkg.com/phosphor-icons"></script>
+          <script>
+              function showNextStep(cardType) {
+                  // Hide the first step
+                  document.getElementById('nextStep').style.display = 'block';
+      
+                  // Set the chosen accountTypeSend value as a hidden input
+                  document.querySelector("#accountTypeSendInput").value = cardType;
+              }
+          </script>
+      </body>
