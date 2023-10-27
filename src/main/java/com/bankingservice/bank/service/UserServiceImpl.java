@@ -1,7 +1,6 @@
 package com.bankingservice.bank.service;
 
 import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bankingservice.bank.dto.AccountInfo;
@@ -41,6 +40,8 @@ public class UserServiceImpl implements UserService{
             .build();
 
             User savedUser = userRepository.save(newUser);
+
+
             return EndPointResponse.builder()
                 .responseCode(AccountUtils.ACCOUNT_SUCCESSFUL_CREATION)
                 .responseMessage(AccountUtils.ACCOUNT_SUCCESSFUL_CREATION_MESSAGE)
@@ -98,8 +99,8 @@ public class UserServiceImpl implements UserService{
 
         User sender = userRepository.findByAccountNumber(Request.getAccountNumSender());
         User receiver = userRepository.findByAccountNumber(Request.getAccountNumReceiver());
-        String chooseAccount = Request.getSendAccount();
-        String receiveAccount = Request.getReceiveAccount();
+        String chooseAccount = Request.getSendAccountType();
+        String receiveAccount = Request.getReceiveAccountType();
         BigDecimal tranferAmount = new BigDecimal(Request.getAmount());
 
         boolean isAccountSenderExists = userRepository.existsByAccountNumber(sender.getAccountNumber());
@@ -190,6 +191,10 @@ public class UserServiceImpl implements UserService{
 
     }
 
+
+
+
+
     @Override
     public EndPointResponse addMoney(AddRequest Request){
 
@@ -204,6 +209,7 @@ public class UserServiceImpl implements UserService{
         }
         
         User foundUser = userRepository.findByAccountNumber(Request.getAccountNumber());
+        
 
         AccountUtils.receiveAdd(Request.getAmount(), foundUser, Request.getAccountType());
         userRepository.save(foundUser);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.bankingservice.bank.dto.TranferRequest;
 import com.bankingservice.bank.entity.User;
+import com.bankingservice.bank.service.TransactionServiceImpl;
 import com.bankingservice.bank.service.UserServiceImpl;
 
 @Controller
@@ -16,6 +17,9 @@ public class TranferController {
 
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    TransactionServiceImpl transactionService;
 
     @GetMapping("/transfer")
     public TranferRequest transfer(@RequestParam(name = "accountTypeSend", required = false) String accountTypeSend,
@@ -39,11 +43,13 @@ public class TranferController {
         tranferRequest.setAccountNumSender(user.getAccountNumber());
         tranferRequest.setAccountNumReceiver(accountNumber);
         tranferRequest.setAmount(amount);
-        tranferRequest.setSendAccount(accountTypeSend);
-        tranferRequest.setReceiveAccount(accountTypeReceive);
+        tranferRequest.setSendAccountType(accountTypeSend);
+        tranferRequest.setReceiveAccountType(accountTypeReceive);
 
-        if (tranferRequest.getAccountNumReceiver() != null && tranferRequest.getAccountNumSender() != null && tranferRequest.getAmount() != null && tranferRequest.getSendAccount() != null && tranferRequest.getReceiveAccount() != null){
+        if (tranferRequest.getAccountNumReceiver() != null && tranferRequest.getAccountNumSender() != null && tranferRequest.getAmount() != null && tranferRequest.getSendAccountType() != null && tranferRequest.getReceiveAccountType() != null){
             userService.tranferMoney(tranferRequest);
+            transactionService.addTransactionHistory(tranferRequest);
+            
         }
 
         return tranferRequest;

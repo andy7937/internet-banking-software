@@ -14,6 +14,6 @@ public class TranferRequest {
     private String accountNumSender;
     private String accountNumReceiver;
     private String amount;
-    private String sendAccount;
-    private String receiveAccount;
+    private String sendAccountType;
+    private String receiveAccountType;
 }
