@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class TranferRequest {
-    private String accountSender;
-    private String accountReceiver;
+    private String accountNumSender;
+    private String accountNumReceiver;
     private String amount;
     private String sendAccount;
     private String receiveAccount;

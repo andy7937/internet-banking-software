@@ -96,8 +96,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public EndPointResponse tranferMoney(TranferRequest Request){
 
-        User sender = userRepository.findByAccountNumber(Request.getAccountSender());
-        User receiver = userRepository.findByAccountNumber(Request.getAccountReceiver());
+        User sender = userRepository.findByAccountNumber(Request.getAccountNumSender());
+        User receiver = userRepository.findByAccountNumber(Request.getAccountNumReceiver());
         String chooseAccount = Request.getSendAccount();
         String receiveAccount = Request.getReceiveAccount();
         BigDecimal tranferAmount = new BigDecimal(Request.getAmount());

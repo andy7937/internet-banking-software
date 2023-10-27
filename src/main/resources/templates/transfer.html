@@ -893,27 +893,28 @@
                           <div class="transfers">
                               <!-- Step 2: Enter accountNumber, amount, and choose accountTypeReceive -->
                               <form action="/transfer" method="get">
-                                  <div class="user-account">
-                                      <label for="accountNumber">User Account Number:</label>
-                                      <input type="text" id="accountNumber" name="accountNumber">
-                                  </div>
-                                  <div class="amount">
-                                      <label for="amount">Amount to Send:</label>
-                                      <input type="text" id="amount" name="amount">
-                                  </div>
-                                  <div class="account-selection">
-                                      <p>Select Account Type:</p>
-                                      <div class="account-options">
-                                          <input type="radio" id="chequeReceive" name="accountTypeReceive" value="cheque">
-                                          <label for="cheque">Cheque</label>
-                                          <input type="radio" id="savingsReceive" name="accountTypeReceive" value="savings">
-                                          <label for="savings">Savings</label>
-                                          <input type="radio" id="creditReceive" name="accountTypeReceive" value="credit">
-                                          <label for="credit">Credit</label>
-                                      </div>
-                                  </div>
-                                  <input type="submit" value="Submit">
-                              </form>
+                                <input type="hidden" id="accountTypeSendInput" name="accountTypeSend">
+                                <div class="user-account">
+                                    <label for="accountNumber">User Account Number:</label>
+                                    <input type="text" id="accountNumber" name="accountNumber">
+                                </div>
+                                <div class="amount">
+                                    <label for="amount">Amount to Send:</label>
+                                    <input type="text" id="amount" name="amount">
+                                </div>
+                                <div class="account-selection">
+                                    <p>Select Account Type:</p>
+                                    <div class="account-options">
+                                        <input type="radio" id="chequeReceive" name="accountTypeReceive" value="cheque">
+                                        <label for="cheque">Cheque</label>
+                                        <input type="radio" id="savingsReceive" name="accountTypeReceive" value="savings">
+                                        <label for="savings">Savings</label>
+                                        <input type="radio" id="creditReceive" name="accountTypeReceive" value="credit">
+                                        <label for="credit">Credit</label>
+                                    </div>
+                                </div>
+                                <input type="submit" value="Submit">
+                            </form>
                           </div>
                       </section>
                   </div>

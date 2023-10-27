@@ -36,11 +36,15 @@ public class TranferController {
         
 
         TranferRequest tranferRequest = new TranferRequest();
-        tranferRequest.setAccountSender(accountTypeSend);
-        tranferRequest.setAccountReceiver(accountTypeReceive);
+        tranferRequest.setAccountNumSender(user.getAccountNumber());
+        tranferRequest.setAccountNumReceiver(accountNumber);
         tranferRequest.setAmount(amount);
-        tranferRequest.setSendAccount(user.getAccountNumber());
-        tranferRequest.setReceiveAccount(accountNumber);
+        tranferRequest.setSendAccount(accountTypeSend);
+        tranferRequest.setReceiveAccount(accountTypeReceive);
+
+        if (tranferRequest.getAccountNumReceiver() != null && tranferRequest.getAccountNumSender() != null && tranferRequest.getAmount() != null && tranferRequest.getSendAccount() != null && tranferRequest.getReceiveAccount() != null){
+            userService.tranferMoney(tranferRequest);
+        }
 
         return tranferRequest;
     }
