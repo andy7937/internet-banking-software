@@ -1,22 +1,15 @@
 package com.bankingservice.bank.dto;
 
-import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 
-public class AccountInfo {
-    
-    private String name;
+public class EnquiryRequest {
     private String accountNumber;
-    private BigDecimal accountChequings;
-    private BigDecimal accountSavings;
-    private BigDecimal accountCredit;
 }

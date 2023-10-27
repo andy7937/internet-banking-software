@@ -61,21 +61,41 @@ public class AuthController {
             @RequestParam String email,
             @RequestParam String username,
             @RequestParam String password,
+            @RequestParam String confirmPassword,
             @RequestParam String address,
             @RequestParam String accountType,
 
             Model model
             ) {
 
-        // make the first letter of the first name and last name uppercase
-        firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
-        lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
+        int check = 0;
 
         // Check if the email, username or phonenumber exists in the database
-        if (!userRepository.existsByEmail(email)) {
-            if (!userRepository.existsByUsername(username)) {
-                if (!userRepository.existsByPhoneNumber(phoneNumber)) {
-                    UserRequest userRequest = new UserRequest();
+        if (userRepository.existsByEmail(email)) {
+            model.addAttribute("erroremail", "Email already registered");
+            check = 1;
+        }
+        if (userRepository.existsByUsername(username)){
+            model.addAttribute("errorusername", "Username already exists");
+            check = 1;
+
+        }
+        if (userRepository.existsByPhoneNumber(phoneNumber)){
+            model.addAttribute("errorphone", "Phone Number already registered");
+            check = 1;
+
+        }
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("errorpassword", "Passwords do not match");
+            check = 1;
+
+        }
+        if (check == 0) {
+             // make the first letter of the first name and last name uppercase
+            firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
+            lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
+            
+              UserRequest userRequest = new UserRequest();
                     userRequest.setFirstName(firstName);
                     userRequest.setLastName(lastName);
                     userRequest.setAge(age);
@@ -87,17 +107,8 @@ public class AuthController {
                     userRequest.setAccountType(accountType);
                     userService.createUser(userRequest); 
                     return "home"; // Redirect to the login page.
-                }else{
-                    model.addAttribute("error", "Phone number already exists");
-                    return "register";
-                }
-            }else{
-                model.addAttribute("error", "Username already exists");
-                return "register";
-            }
-        } else{
-            model.addAttribute("error", "Email already exists");
-            return "register";
         }
+        return "register";
+      
     }
 }

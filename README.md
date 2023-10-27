@@ -1,5 +1,7 @@
 This repository is for a practice online banking software called FinSecure. Inspiration for the website is similar to westpac online banking website.
 
+git push --set-upstream origin nameofbranch
+
 
 Sources used in project:
 
@@ -31,5 +33,5 @@ by hashing the password entered, compare that with the password on the db withou
 
 storing on database
 storing user data on mySql, how to make new tables with the required information
-
+t
 how to user html files and start projects on github 

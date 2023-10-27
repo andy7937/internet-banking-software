@@ -8,15 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 
-public class AccountInfo {
-    
-    private String name;
+public class AddRequest {
     private String accountNumber;
-    private BigDecimal accountChequings;
-    private BigDecimal accountSavings;
-    private BigDecimal accountCredit;
+    private BigDecimal amount;
+    private String accountType;
 }

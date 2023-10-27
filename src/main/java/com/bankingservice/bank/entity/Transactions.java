@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,31 +21,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "transactions")
+public class Transactions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private String phoneNumber;
-    private String email;
-    private String username;
-    private String password;
-    private String address;
-    private String accountNumber;
-    private BigDecimal accountChequings;
-    private BigDecimal accountSavings;
-    private BigDecimal accountCredit;
 
-    private String accountType;
-    private String status;
+    private String accountSender;
+    private String accountReceiver;
+    private BigDecimal sendAmount;
+    private String sendAccountType;
+    private String receiveAccountType;
     
     @CreationTimestamp
-    private LocalDateTime createdAt;
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
-  
+    private LocalDateTime creationTime;
 }
