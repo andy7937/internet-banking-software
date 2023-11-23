@@ -20,6 +20,18 @@ https://www.freepik.com/premium-vector/shark-fin-shield-logo_29525401.htm
 bank image
 https://unsplash.com/photos/grey-concrete-building-2_K82gx9Uk8
 
+How to open the website on localhost
+http://localhost:8080/home
+
+testing account tranfers postman
+https://blue-equinox-247912.postman.co/workspace/Team-Workspace~3b1ca28c-7f14-4b4b-8673-3ab50344c2c0/request/30509100-a22686d3-9d20-44d5-b4ec-03d80eec3f31
+
+
+RUN USING THIS CODE
+mvn spring-boot:run
+
+
+
 
 
 
