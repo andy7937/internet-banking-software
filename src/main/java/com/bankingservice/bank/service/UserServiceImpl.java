@@ -9,6 +9,8 @@ import com.bankingservice.bank.dto.EndPointResponse;
 import com.bankingservice.bank.dto.EnquiryRequest;
 import com.bankingservice.bank.dto.TranferRequest;
 import com.bankingservice.bank.dto.UserRequest;
+import com.bankingservice.bank.dto.AdminAccountInfo;
+import com.bankingservice.bank.dto.AdminEnquiry;
 import com.bankingservice.bank.entity.User;
 import com.bankingservice.bank.repository.UserRepository;
 import com.bankingservice.bank.utils.AccountUtils;
@@ -228,4 +230,40 @@ public class UserServiceImpl implements UserService{
         .build();
     }
 
+    
+    @Override
+    public AdminEnquiry adminEnquiry(AdminAccountInfo Request){
+
+        boolean isAccountExists = userRepository.existsByAccountNumber(Request.getAccountNumber());
+
+        if (!isAccountExists){
+            return AdminEnquiry.builder()
+                .responseCode(AccountUtils.ACCOUNT_NOT_FOUND)
+                .responseMessage(AccountUtils.ACCOUNT_NOT_FOUND_MESSAGE)
+                .adminAccountInfo(null)
+                .build();
+        }
+
+        User foundUser = userRepository.findByAccountNumber(Request.getAccountNumber());
+
+        return AdminEnquiry.builder()
+        .responseCode(AccountUtils.ACCOUNT_FOUND)
+        .responseMessage(AccountUtils.ACCOUNT_FOUND_MESSAGE)
+        .adminAccountInfo(AdminAccountInfo.builder()
+            .firstName(foundUser.getFirstName())
+            .lastName(foundUser.getLastName())
+            .age(foundUser.getAge())
+            .phoneNumber(foundUser.getPhoneNumber())
+            .email(foundUser.getEmail())
+            .username(foundUser.getUsername())
+            .address(foundUser.getAddress())
+            .accountNumber(AccountUtils.generateAccountNumber(userRepository))
+            .accountChequings(foundUser.getAccountChequings())
+            .accountSavings(foundUser.getAccountSavings())
+            .accountCredit(foundUser.getAccountCredit())
+            .accountType(foundUser.getAccountType())
+        .build())
+        .build();
+        
+    }
 }
