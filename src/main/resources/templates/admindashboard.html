@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .account-info {
+            margin-top: 20px;
+        }
+        .account-info div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <form method="post" action="/admin/enquiry">
+            <div class="form-group">
+                <label for="accountNumber">Customer ID or username:</label>
+                <input type="text" id="accountNumber" name="accountNumber" required>
+            </div>
+            <button type="submit">Get Account Info</button>
+        </form>
+        <div class="account-info">
+            <div th:if="${firstName}">First Name: <span th:text="${firstName}"></span></div>
+            <div th:if="${lastName}">Last Name: <span th:text="${lastName}"></span></div>
+            <div th:if="${age}">Age: <span th:text="${age}"></span></div>
+            <div th:if="${phoneNumber}">Phone Number: <span th:text="${phoneNumber}"></span></div>
+            <div th:if="${email}">Email: <span th:text="${email}"></span></div>
+            <div th:if="${username}">Username: <span th:text="${username}"></span></div>
+            <div th:if="${address}">Address: <span th:text="${address}"></span></div>
+            <div th:if="${accountType}">Account Type: <span th:text="${accountType}"></span></div>
+            <div th:if="${accountNumber}">Account Number: <span th:text="${accountNumber}"></span></div>
+            <div th:if="${accountChequings}">Account Chequings: <span th:text="${accountChequings}"></span></div>
+            <div th:if="${accountSavings}">Account Savings: <span th:text="${accountSavings}"></span></div>
+            <div th:if="${accountCredit}">Account Credit: <span th:text="${accountCredit}"></span></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -34,6 +34,11 @@ public class AuthController {
         return "register"; // This returns the "signup.html" Thymeleaf template.
     }
 
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "admin"; // This returns the "admin.html" Thymeleaf template.
+    }
+
     @PostMapping("/login")
     public String login(
             @RequestParam String username,
@@ -111,4 +116,5 @@ public class AuthController {
         return "register";
       
     }
+
 }

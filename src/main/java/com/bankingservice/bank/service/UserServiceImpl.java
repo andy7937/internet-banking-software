@@ -11,6 +11,7 @@ import com.bankingservice.bank.dto.TranferRequest;
 import com.bankingservice.bank.dto.UserRequest;
 import com.bankingservice.bank.dto.AdminAccountInfo;
 import com.bankingservice.bank.dto.AdminEnquiry;
+import com.bankingservice.bank.dto.AdminRequest;
 import com.bankingservice.bank.entity.User;
 import com.bankingservice.bank.repository.UserRepository;
 import com.bankingservice.bank.utils.AccountUtils;
@@ -232,7 +233,7 @@ public class UserServiceImpl implements UserService{
 
     
     @Override
-    public AdminEnquiry adminEnquiry(AdminAccountInfo Request){
+    public AdminEnquiry adminEnquiry(AdminRequest Request){
 
         boolean isAccountExists = userRepository.existsByAccountNumber(Request.getAccountNumber());
 

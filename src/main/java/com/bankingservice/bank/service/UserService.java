@@ -7,6 +7,7 @@ import com.bankingservice.bank.dto.TranferRequest;
 import com.bankingservice.bank.dto.UserRequest;
 import com.bankingservice.bank.dto.AdminAccountInfo;
 import com.bankingservice.bank.dto.AdminEnquiry;
+import com.bankingservice.bank.dto.AdminRequest;
 
 
 
@@ -17,7 +18,7 @@ public interface UserService {
     String nameEnquiry(EnquiryRequest Request);
     EndPointResponse tranferMoney(TranferRequest Request);
     EndPointResponse addMoney(AddRequest Request);
-    AdminEnquiry adminEnquiry(AdminAccountInfo Request);
+    AdminEnquiry adminEnquiry(AdminRequest Request);
 
 }
 
