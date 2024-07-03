@@ -31,6 +31,7 @@ public class AdminDashboardController {
             @RequestParam String username,
             @RequestParam String password,
             Model model) {
+                
 
         // Simplified authentication logic (should not be hardcoded)
         if ("admin".equals(username) && "admin".equals(password)) {
@@ -51,6 +52,11 @@ public class AdminDashboardController {
 
         AdminRequest adminRequest = new AdminRequest(accountNumber);
         AdminEnquiry adminEnquiry = userService.adminEnquiry(adminRequest);
+
+        if (adminEnquiry.getResponseCode().equals("003")){
+            model.addAttribute("error", adminEnquiry.getResponseMessage());
+            return "admindashboard";
+        }
 
         model.addAttribute("firstName", adminEnquiry.getAdminAccountInfo().getFirstName());
         model.addAttribute("lastName", adminEnquiry.getAdminAccountInfo().getLastName());
